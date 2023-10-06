@@ -1,7 +1,9 @@
 package com.PollSystem.controller;
 
 import com.PollSystem.model.PollQuestion;
+import com.PollSystem.model.UserAnswer;
 import com.PollSystem.service.PollQuestionService;
+import com.PollSystem.service.UserAnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +17,8 @@ public class PollQuestionController {
 
     @Autowired
     PollQuestionService pollQuestionService;
+    @Autowired
+    UserAnswerService userAnswerService;
 
 
     @PostMapping("/create")
@@ -43,4 +47,28 @@ public class PollQuestionController {
         int answerCount = pollQuestionService.countHowManyUserAnsweredByQuestionId(questionId);
         return ResponseEntity.ok(answerCount);
     }
+
+    @GetMapping("/countQuestionsAnswered/{userId}")
+    public ResponseEntity<Integer> countQuestionsAnsweredByUser(@PathVariable Long userId) {
+        int questionAnswered = pollQuestionService.countQuestionsAnsweredByUser(userId);
+        return ResponseEntity.ok(questionAnswered);
+    }
+
+    @GetMapping("/allAnswersToAllQuestions/{userId}")
+    public ResponseEntity<List<UserAnswer>> getAllUserAnswersToQuestionsByUserId(@PathVariable Long userId) {
+        List<UserAnswer> userAnswers = userAnswerService.getAllUserAnswersByUserId(userId);
+
+        if (userAnswers.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(userAnswers);
+    }
+
+    @GetMapping("/countAnswerPerQuestion/{questionId}")
+    public ResponseEntity<Map<Long, Long>> countUsersPerAnswerOption(@PathVariable Long questionId) {
+        Map<Long, Long> result = pollQuestionService.countUsersPerAnswerOption(questionId);
+        return ResponseEntity.ok(result);
+    }
+
 }

@@ -11,4 +11,10 @@ public interface PollQuestionService {
     void deletePollQuestionById(Long id);
     PollQuestion getPollQuestion(Long id);
     int countHowManyUserAnsweredByQuestionId(Long questionId);
+
+    int countQuestionsAnsweredByUser(Long userId);
+
+    Map<Long, Integer> getAllUserAnswersToQuestionsByUserId(Long userId);
+
+    Map<Long, Long> countUsersPerAnswerOption(Long questionId);
 }

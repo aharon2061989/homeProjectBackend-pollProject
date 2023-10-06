@@ -1,63 +1,63 @@
 package com.PollSystem.model;
 
 public class AnswerOption {
-    private Long id;
-    private String firstAnswerOption;
-    private String secondAnswerOption;
-    private String thirdAnswerOption;
-    private String fourthAnswerOption;
+    private Long answerOptionId;
+    private String AnswerOption1;
+    private String AnswerOption2;
+    private String AnswerOption3;
+    private String AnswerOption4;
     private Long questionId;
 
     public AnswerOption() {
     }
 
-    public AnswerOption(Long id, String firstAnswerOption, String secondAnswerOption, String thirdAnswerOption, String fourthAnswerOption, Long questionId) {
-        this.id = id;
-        this.firstAnswerOption = firstAnswerOption;
-        this.secondAnswerOption = secondAnswerOption;
-        this.thirdAnswerOption = thirdAnswerOption;
-        this.fourthAnswerOption = fourthAnswerOption;
+    public AnswerOption(Long answerOptionId, String AnswerOption1, String AnswerOption2, String AnswerOption3, String AnswerOption4, Long questionId) {
+        this.answerOptionId = answerOptionId;
+        this.AnswerOption1 = AnswerOption1;
+        this.AnswerOption2 = AnswerOption2;
+        this.AnswerOption3 = AnswerOption3;
+        this.AnswerOption4 = AnswerOption4;
         this.questionId = questionId;
     }
 
     public Long getId() {
-        return id;
+        return answerOptionId;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.answerOptionId = answerOptionId;
     }
 
-    public String getFirstAnswerOption() {
-        return firstAnswerOption;
+    public String getAnswerOption1() {
+        return AnswerOption1;
     }
 
-    public void setFirstAnswerOption(String firstAnswerOption) {
-        this.firstAnswerOption = firstAnswerOption;
+    public void setAnswerOption1(String answerOption1) {
+        AnswerOption1 = answerOption1;
     }
 
-    public String getSecondAnswerOption() {
-        return secondAnswerOption;
+    public String getAnswerOption2() {
+        return AnswerOption2;
     }
 
-    public void setSecondAnswerOption(String secondAnswerOption) {
-        this.secondAnswerOption = secondAnswerOption;
+    public void setAnswerOption2(String answerOption2) {
+        AnswerOption2 = answerOption2;
     }
 
-    public String getThirdAnswerOption() {
-        return thirdAnswerOption;
+    public String getAnswerOption3() {
+        return AnswerOption3;
     }
 
-    public void setThirdAnswerOption(String thirdAnswerOption) {
-        this.thirdAnswerOption = thirdAnswerOption;
+    public void setAnswerOption3(String answerOption3) {
+        AnswerOption3 = answerOption3;
     }
 
-    public String getFourthAnswerOption() {
-        return fourthAnswerOption;
+    public String getAnswerOption4() {
+        return AnswerOption4;
     }
 
-    public void setFourthAnswerOption(String fourthAnswerOption) {
-        this.fourthAnswerOption = fourthAnswerOption;
+    public void setAnswerOption4(String answerOption4) {
+        AnswerOption4 = answerOption4;
     }
 
     public Long getQuestionId() {

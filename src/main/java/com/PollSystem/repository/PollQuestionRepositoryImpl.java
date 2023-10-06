@@ -9,6 +9,10 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 @Repository
 public class PollQuestionRepositoryImpl implements PollQuestionRepository {
 
@@ -69,4 +73,50 @@ public class PollQuestionRepositoryImpl implements PollQuestionRepository {
         }
         return userAnswerCount;
     }
+
+    @Override
+    public int countQuestionsAnsweredByUser(Long userId) {
+        String sql = "SELECT COUNT (DISTINCT question_id) FROM user_answer WHERE user_id = ?";
+        logger.info("SQL Query: {} with userId: {}", sql, userId);
+        Integer count = jdbcTemplate.queryForObject(sql, Integer.class, userId);
+        if (count != null){
+            return count;
+        }
+        else {
+            count = 0;
+        }
+        return count;
+    }
+    @Override
+    public Map<Long, Integer> getAllUserAnswersToQuestionsByUserId(Long userId) {
+        String sql = "SELECT question_id, selected_answer FROM user_answer WHERE user_id = ?";
+        List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql, userId);
+
+        Map<Long, Integer> userAnswers = new HashMap<>();
+        for (Map<String, Object> row : rows) {
+            Long questionId = (Long) row.get("question_id");
+            Integer selectedAnswer = (Integer) row.get("selected_answer");
+            userAnswers.put(questionId, selectedAnswer);
+        }
+        return userAnswers;
+    }
+    @Override
+    public Map<Long, Long> countUsersPerAnswerOption(Long questionId) {
+        String sql = "SELECT answer_option_id, COUNT(DISTINCT user_id) FROM user_answer WHERE question_id = ? GROUP BY answer_option_id";
+
+        List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql, questionId);
+        Map<Long, Long> countMap = new HashMap<>();
+
+        for (Map<String, Object> row : rows) {
+            Long answerOptionId = ((Number) row.get("answer_option_id")).longValue();
+            Long userCount = ((Number) row.get("count")).longValue();
+            countMap.put(answerOptionId, userCount);
+        }
+
+        return countMap;
+    }
+
+
+
+
 }

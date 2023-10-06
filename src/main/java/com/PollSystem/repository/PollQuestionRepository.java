@@ -12,4 +12,10 @@ public interface PollQuestionRepository {
     PollQuestion getPollQuestion(Long questionId);
 
     int countHowManyUserAnsweredByQuestionId(Long questionId);
+
+    int countQuestionsAnsweredByUser(Long userId);
+
+    Map<Long, Integer> getAllUserAnswersToQuestionsByUserId(Long userId);
+
+    Map<Long, Long> countUsersPerAnswerOption(Long questionId);
 }

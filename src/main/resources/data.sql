@@ -10,10 +10,10 @@ CREATE TABLE poll_question (
 
 CREATE TABLE answer_option (
     answer_option_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    first_answer_option VARCHAR(300) NOT NULL,
-    second_answer_option VARCHAR(300) NOT NULL,
-    third_answer_option VARCHAR(300) NOT NULL,
-    fourth_answer_option VARCHAR(300) NOT NULL,
+    answer_option_1 VARCHAR(300) NOT NULL,
+    answer_option_2 VARCHAR(300) NOT NULL,
+    answer_option_3 VARCHAR(300) NOT NULL,
+    answer_option_4 VARCHAR(300) NOT NULL,
     question_id INT UNSIGNED NOT NULL,
     PRIMARY KEY (answer_option_id),
     FOREIGN KEY (question_id) REFERENCES poll_question (id)

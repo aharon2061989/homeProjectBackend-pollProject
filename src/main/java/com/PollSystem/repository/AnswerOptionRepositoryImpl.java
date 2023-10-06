@@ -25,13 +25,13 @@ public class AnswerOptionRepositoryImpl implements AnswerOptionRepository{
 
     @Override
     public void createAnswerOption(AnswerOption answerOption, Long questionId) {
-        String sql = "INSERT INTO " + ANSWER_OPTION_TABLE_NAME + " (first_answer_option, second_answer_option, third_answer_option, fourth_answer_option, question_id) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO " + ANSWER_OPTION_TABLE_NAME + " (answer_option_1, answer_option_2, answer_option_3, answer_option_4, question_id) VALUES (?, ?, ?, ?, ?)";
         jdbcTemplate.update(
                 sql,
-                answerOption.getFirstAnswerOption(),
-                answerOption.getSecondAnswerOption(),
-                answerOption.getThirdAnswerOption(),
-                answerOption.getFourthAnswerOption(),
+                answerOption.getAnswerOption1(),
+                answerOption.getAnswerOption2(),
+                answerOption.getAnswerOption3(),
+                answerOption.getAnswerOption4(),
                 questionId
         );
     }
