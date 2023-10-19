@@ -2,11 +2,8 @@ package com.PollSystem.repository;
 
 import com.PollSystem.model.PollQuestion;
 import com.PollSystem.model.UserAnswer;
-import com.PollSystem.model.UserAnswerRequest;
-import com.PollSystem.model.UserAnswerResponse;
 import com.PollSystem.repository.mapper.PollQuestionMapper;
 import com.PollSystem.repository.mapper.UserAnswerMapper;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +12,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class UserAnswerRepositoryImpl implements UserAnswerRepository{
@@ -98,5 +96,16 @@ public class UserAnswerRepositoryImpl implements UserAnswerRepository{
         catch (EmptyResultDataAccessException e){
             return null;
         }
+    }
+
+    @Override
+    public List<Map<String, Object>> countUsersAnswerPerAnswerOption(Long questionId){
+        String sql = "SELECT " +
+                " COUNT(CASE WHEN selected_answer = 1 THEN 1 ELSE NULL END) AS answer_option_1, " +
+                " COUNT(CASE WHEN selected_answer = 2 THEN 2 ELSE NULL END) AS answer_option_2, " +
+                " COUNT(CASE WHEN selected_answer = 3 THEN 3 ELSE NULL END) AS answer_option_3, " +
+                " COUNT(CASE WHEN selected_answer = 4 THEN 4 ELSE NULL END) AS answer_option_4 " +
+                " FROM user_answer WHERE question_id = ?";
+        return jdbcTemplate.queryForList(sql, questionId);
     }
 }

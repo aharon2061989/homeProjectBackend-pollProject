@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/userAnswer")
@@ -54,5 +55,11 @@ public class UserAnswerController {
     @GetMapping("/checkRegistration/{userId}")
     public Boolean checkUserRegistration(@PathVariable Long userId) {
         return userProjectService.checkUserRegistration(userId);
+    }
+
+    @GetMapping("/countAnswerPerOption/{questionId}")
+    public ResponseEntity<List<Map<String, Object>>> countUsersAnswerPerAnswerOption(@PathVariable Long questionId){
+        List<Map<String, Object>> result = userAnswerService.countUsersAnswerPerAnswerOption(questionId);
+        return ResponseEntity.ok(result);
     }
 }

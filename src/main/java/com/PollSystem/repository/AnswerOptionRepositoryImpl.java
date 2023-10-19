@@ -49,7 +49,7 @@ public class AnswerOptionRepositoryImpl implements AnswerOptionRepository{
             return jdbcTemplate.queryForObject(sql, answerOptionMapper, questionId);
         }
         catch (EmptyResultDataAccessException e){
-           logger.info("warning, empty result data");
+            logger.info("warning, empty result data");
             return null;
         }
     }

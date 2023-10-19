@@ -100,20 +100,29 @@ public class PollQuestionRepositoryImpl implements PollQuestionRepository {
         }
         return userAnswers;
     }
+
     @Override
-    public Map<Long, Long> countUsersPerAnswerOption(Long questionId) {
-        String sql = "SELECT answer_option_id, COUNT(DISTINCT user_id) FROM user_answer WHERE question_id = ? GROUP BY answer_option_id";
-
-        List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql, questionId);
-        Map<Long, Long> countMap = new HashMap<>();
-
-        for (Map<String, Object> row : rows) {
-            Long answerOptionId = ((Number) row.get("answer_option_id")).longValue();
-            Long userCount = ((Number) row.get("count")).longValue();
-            countMap.put(answerOptionId, userCount);
-        }
-
-        return countMap;
+    public List<Map<String, Object>> getAllQuestionsAndCountSelectedOptions(){
+        String sql = " SELECT " +
+                "    pq.id AS question_id, " +
+                "    pq.question_title AS question_title, " +
+                "    ao.option_id AS option_id, " +
+                "    ao.option_text AS option_text, " +
+                "    COUNT(ua.selected_answer) AS user_count " +
+                " FROM poll_question pq " +
+                " CROSS JOIN ( " +
+                "    SELECT 1 AS option_id, answer_option_1 AS option_text FROM answer_option " +
+                "    UNION ALL " +
+                "    SELECT 2 AS option_id, answer_option_2 AS option_text FROM answer_option " +
+                "    UNION ALL " +
+                "    SELECT 3 AS option_id, answer_option_3 AS option_text FROM answer_option " +
+                "    UNION ALL " +
+                "    SELECT 4 AS option_id, answer_option_4 AS option_text FROM answer_option " +
+                ") ao " +
+                "LEFT JOIN user_answer ua ON pq.id = ua.question_id AND ua.selected_answer = ao.option_id " +
+                "GROUP BY pq.id, pq.question_title, ao.option_id, ao.option_text " +
+                "ORDER BY pq.id, ao.option_id";
+        return jdbcTemplate.queryForList(sql);
     }
 
 

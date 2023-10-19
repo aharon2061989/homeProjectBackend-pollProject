@@ -5,6 +5,7 @@ import com.PollSystem.repository.PollQuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -46,9 +47,10 @@ public class PollQuestionServiceImpl implements PollQuestionService{
     public Map<Long, Integer> getAllUserAnswersToQuestionsByUserId(Long userId){
         return pollQuestionRepository.getAllUserAnswersToQuestionsByUserId(userId);
     }
+
     @Override
-    public Map<Long, Long> countUsersPerAnswerOption(Long questionId){
-        return pollQuestionRepository.countUsersPerAnswerOption(questionId);
+    public List<Map<String, Object>> getAllQuestionsAndCountSelectedOptions(){
+        return pollQuestionRepository.getAllQuestionsAndCountSelectedOptions();
     }
 
 }

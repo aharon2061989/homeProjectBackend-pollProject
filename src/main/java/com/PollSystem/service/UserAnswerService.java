@@ -7,6 +7,7 @@ import com.PollSystem.model.UserAnswerResponse;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
+import java.util.Map;
 
 public interface UserAnswerService {
     ResponseEntity<?> createUserAnswer(UserAnswerRequest userAnswerRequest);
@@ -17,4 +18,6 @@ public interface UserAnswerService {
 
 
     List<PollQuestion> getAllUserQuestionsByUserId(Long userId);
+
+    List<Map<String, Object>> countUsersAnswerPerAnswerOption(Long questionId);
 }

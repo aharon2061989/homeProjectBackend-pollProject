@@ -65,9 +65,9 @@ public class PollQuestionController {
         return ResponseEntity.ok(userAnswers);
     }
 
-    @GetMapping("/countAnswerPerQuestion/{questionId}")
-    public ResponseEntity<Map<Long, Long>> countUsersPerAnswerOption(@PathVariable Long questionId) {
-        Map<Long, Long> result = pollQuestionService.countUsersPerAnswerOption(questionId);
+    @GetMapping("/allQuestionsCountOptions")
+    public ResponseEntity<List<Map<String, Object>>> getAllQuestionsAndCountSelectedOptions(){
+        List<Map<String, Object>> result = pollQuestionService.getAllQuestionsAndCountSelectedOptions();
         return ResponseEntity.ok(result);
     }
 

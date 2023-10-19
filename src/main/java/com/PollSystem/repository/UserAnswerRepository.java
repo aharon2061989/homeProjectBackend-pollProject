@@ -5,6 +5,7 @@ import com.PollSystem.model.UserAnswer;
 import com.PollSystem.model.UserAnswerRequest;
 
 import java.util.List;
+import java.util.Map;
 
 public interface UserAnswerRepository {
     Long createUserAnswer(UserAnswer userAnswer);
@@ -15,5 +16,5 @@ public interface UserAnswerRepository {
     List<PollQuestion> getAllUserQuestionsByUserId(Long userId);
 
 
-
+    List<Map<String, Object>> countUsersAnswerPerAnswerOption(Long questionId);
 }

@@ -24,10 +24,6 @@ public class AnswerOption {
         return answerOptionId;
     }
 
-    public void setId(Long id) {
-        this.answerOptionId = answerOptionId;
-    }
-
     public String getAnswerOption1() {
         return AnswerOption1;
     }

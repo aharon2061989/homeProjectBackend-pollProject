@@ -7,11 +7,11 @@ import com.PollSystem.userProject.UserProjectService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class UserAnswerServiceImpl implements UserAnswerService{
@@ -70,6 +70,11 @@ public class UserAnswerServiceImpl implements UserAnswerService{
     @Override
     public List<PollQuestion> getAllUserQuestionsByUserId(Long userId){
         return userAnswerRepository.getAllUserQuestionsByUserId(userId);
+    }
+
+    @Override
+    public List<Map<String, Object>> countUsersAnswerPerAnswerOption(Long questionId){
+        return userAnswerRepository.countUsersAnswerPerAnswerOption(questionId);
     }
 
 

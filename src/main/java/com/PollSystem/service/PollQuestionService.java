@@ -16,5 +16,5 @@ public interface PollQuestionService {
 
     Map<Long, Integer> getAllUserAnswersToQuestionsByUserId(Long userId);
 
-    Map<Long, Long> countUsersPerAnswerOption(Long questionId);
+    List<Map<String, Object>> getAllQuestionsAndCountSelectedOptions();
 }
